@@ -1,0 +1,59 @@
+@import './variable.css';
+
+p {
+    font-family: 'Helvetica';
+    font-size: 16px;
+}
+
+.bgr-primary {
+    background-color: var(--primary);
+}
+
+.bg-white {
+    background-color: #f0f0f4;
+    box-shadow: 0 .4px 2px var(--dark);
+}
+
+.text-black {
+    color: var(--dark);
+}
+
+.text-white {
+    color: var(--white);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.heading {
+    font-size: 25px;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.normal {
+    font-size: 16px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.txt-shadow {
+    text-shadow: 2px 2px 8px var(--dark);
+}
+
+.p-right {
+    float: right;
+}
+
+.p-left {
+    float: left;
+}

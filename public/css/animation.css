@@ -1,0 +1,9 @@
+@keyframes show {
+    from {
+        height: 0vh;
+    }
+
+    to {
+        height: 28vh;
+    }
+}
