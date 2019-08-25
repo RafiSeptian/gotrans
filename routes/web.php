@@ -21,6 +21,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/login', 'AuthController@getLogin')->name('login.show');
 Route::post('/login', 'AuthController@postLogin')->name('login');
 Route::get('/register', 'AuthController@getRegister')->name('register.show');
+Route::post('/register', 'AuthController@postRegister')->name('register');
 Route::post('/logout', 'AuthController@logout')->name('logout');
 
 // Auth::routes();

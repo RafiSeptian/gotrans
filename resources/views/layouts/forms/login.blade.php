@@ -1,15 +1,15 @@
-<form action="{{ route('login') }}" method="post">
+<form action="{{ route('login') }}" method="post" id="form-login">
      {{ csrf_field() }}
      <div class="group-form">
           <label for="text">Username</label>
           <div class="form-wrapper">
-               <input type="text" name="username" id="username">
+               <input type="text" name="username" id="username" required>
           </div>
      </div>
      <div class="group-form">
           <label for="password">Password</label>
           <div class="form-wrapper">
-               <input type="password" name="password" id="password">
+               <input type="password" name="password" id="password" required>
           </div>
      </div>
 

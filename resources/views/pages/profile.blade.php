@@ -37,7 +37,7 @@
                     <div class="group-form">
                          <label for="name">Nama lengkap</label>
                          <div class="form-wrapper">
-                              <input type="text" name="name" id="name" value="{{ $user->profile->name }}">
+                              <input type="text" name="name" id="name" value="{{ $user->name }}">
                          </div>
                     </div>
 
@@ -58,7 +58,7 @@
                     <div class="group-form">
                          <label for="name">Alamat</label>
                          <div class="form-wrapper">
-                              <input type="text" name="address" id="address" value="{{ $user->profile->address }}">
+                              <input type="text" name="address" id="address" value="{{ $user->address ? $user->address : '' }}">
                          </div>
                     </div>
                     

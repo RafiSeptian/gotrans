@@ -1,4 +1,4 @@
-<form action="" method="post">
+<form action="{{ route('register') }}" method="post" id="form-register">
           <div class="group-form">
                <label for="name">Nama lengkap</label>
                <div class="form-wrapper">
@@ -8,7 +8,7 @@
           <div class="group-form">
                <label for="text">Username</label>
                <div class="form-wrapper">
-                    <input type="text" name="text" id="text">
+                    <input type="text" name="username" id="username">
                </div>
           </div>
           <div class="group-form">

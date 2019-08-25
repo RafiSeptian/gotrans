@@ -38,6 +38,7 @@
 
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     @stack('script')
 </body>

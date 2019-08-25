@@ -69,9 +69,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $data = $request->all();
+
         $user = User::findOrFail($id);
 
-        $user->update($request->all());
+        if ($request->file('avatar')) {
+            $data['avatar'] = $request->file('avatar')->store('users');
+        }
+
+        $user->update($data);
 
         return redirect()->route('user.index');
     }

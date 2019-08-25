@@ -57,3 +57,7 @@ a:link {
 .p-left {
     float: left;
 }
+
+.br-gray {
+    border: 1px solid var(--gray);
+}

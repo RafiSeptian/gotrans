@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -26,19 +27,38 @@ class AuthController extends Controller
             $response = [
                 'msg' => 'success'
             ];
-            return redirect()->route('home');
         } else {
+
             $response = [
                 'msg' => 'failed'
             ];
         }
 
-        // return response()->json($response);
+        return response()->json($response);
     }
 
     public function getRegister()
     {
         return view('layouts.forms.register');
+    }
+
+    public function postRegister(Request $request)
+    {
+        $data = $request->all();
+
+        $role = [
+            'role_id' => 2
+        ];
+
+        array_push($data, $role);
+
+        $data['password'] = bcrypt($request->password);
+
+        $create = User::create($data);
+
+        return response()->json([
+            'msg' => 'success'
+        ]);
     }
 
     public function logout()

@@ -1154,3 +1154,13 @@ section#main-news .news-wrapper .content img.news-img {
 section#main-news .news-wrapper .content img.news-img:first-child {
     padding-top: 0;
 }
+
+.invalid-msg {
+    font-size: 16px;
+    color: var(--red);
+    font-weight: bold;
+}
+
+.error-form {
+    border: 1px solid var(--red);
+}
