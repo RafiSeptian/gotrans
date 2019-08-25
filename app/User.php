@@ -51,4 +51,9 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasMany(Order::class);
     }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

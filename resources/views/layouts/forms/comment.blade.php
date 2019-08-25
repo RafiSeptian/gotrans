@@ -1,6 +1,9 @@
 <section id="form-comment">
     <h1 class="section-title">Tulis Komentarmu</h1>
-    <form action="" method="post" class="form-comment">
+    <form action="{{ route('comment.post') }}" method="post" class="form-comment">
+
+        {{ csrf_field() }}
+
             {{-- <div class="userdata">
                 <div class="username">
                     <i class="fas fa-user"></i>
@@ -12,7 +15,8 @@
                 </div>
             </div> --}}
             <div class="message">
-                <textarea name="message" id="message" placeholder="Ketikan Komentarmu..."></textarea>
+                <input type="hidden" id="news_id" name="news_id" value="{{ $news->id }}">
+                <textarea name="content" id="message" placeholder="Ketikan Komentarmu..."></textarea>
             </div>
             <button type="submit" class="btn-send">Kirim Komentar</button>
     </form>

@@ -11,6 +11,8 @@
 |
 */
 
+use Jenssegers\Date\Date;
+
 Route::group(['prefix' => '/admin'], function () {
     Voyager::routes();
 });
@@ -53,12 +55,17 @@ Route::resource('user', 'UserController');
 Route::group(['prefix' => '/news'], function () {
     Route::get('/', 'NewsController@index')->name('news.index');
     Route::get('/{slug}', 'NewsController@show')->name('news.show');
+    Route::get('/{slug}', 'NewsController@show')->name('news.show');
+    Route::get('/comment/{id}', 'NewsController@getComment')->name('comment.get');
+    Route::post('/comment', 'NewsController@postComment')->name('comment.post');
 });
 
 Route::any('/search', 'NewsController@search')->name('news.query');
 
 Route::get('/test', function () {
-    return \App\User::all();
+    $date = Date::now()->format('dd F yy');
+
+    return $date;
 });
 
 // custom route voyager

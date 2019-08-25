@@ -73,7 +73,7 @@
             <div class="news-content">
                 <img src="{{ asset('storage/'. $data->images) }}" alt="" class="news-img">
                 <div class="news-item">
-                    <i class="far fa-calendar-alt"></i> 7 Agustus 2019
+                    <i class="far fa-calendar-alt"></i> {{ \Jenssegers\Date\Date::parse($data->created_at)->format('d F Y') }}
                     <i class="far fa-folder"></i> Category
                     <i class="far fa-comments"></i> 10 Comments
                 </div>
@@ -86,36 +86,6 @@
                 <a href="{{ route('news.show', $data->slug) }}" class="btn-more">Selengkapnya</a>
             </div>
         @endforeach
-        {{-- <div class="news-content">
-            <img src="{{ asset('assets/images/news_bg.jpg') }}" alt="" class="news-img">
-            <div class="news-item">
-                <i class="far fa-calendar-alt"></i> 7 Agustus 2019
-                <i class="far fa-folder"></i> Category
-                <i class="far fa-comments"></i> 10 Comments
-            </div>
-            <h2 class="news-title">
-                Judul Berita
-            </h2>
-            <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente mollitia accusamus quae, ex sunt facilis unde enim maiores illum ratione autem quas veritatis possimus tempora accusantium et modi at omnis. Lorem ipsum dolor sit amet....
-            </p>
-            <a href="#" class="btn-more">Selengkapnya</a>
-        </div>
-        <div class="news-content">
-            <img src="{{ asset('assets/images/services.jpg') }}" alt="" class="news-img">
-            <div class="news-item">
-                <i class="far fa-calendar-alt"></i> 7 Agustus 2019
-                <i class="far fa-folder"></i> Category
-                <i class="far fa-comments"></i> 10 Comments
-            </div>
-            <h2 class="news-title">
-                Judul Berita
-            </h2>
-            <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente mollitia accusamus quae, ex sunt facilis unde enim maiores illum ratione autem quas veritatis possimus tempora accusantium et modi at omnis. Lorem ipsum dolor sit amet....
-            </p>
-            <a href="#" class="btn-more">Selengkapnya</a>
-        </div> --}}
     </div>
 </section>
 
