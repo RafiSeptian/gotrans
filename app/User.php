@@ -56,4 +56,14 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function detaildriver()
+    {
+        return $this->hasOne(DetailDriver::class);
+    }
+
+    public function notif()
+    {
+        return $this->hasMany(Notif::class);
+    }
 }

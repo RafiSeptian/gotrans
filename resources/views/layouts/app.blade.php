@@ -18,7 +18,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tablet.css') }}" media="screen and (max-width: 768px)" rel="stylesheet">
-    <link href="{{ asset('css/mobile.css') }}" media="screen and (max-width: 450px)" rel="stylesheet">
+    <link href="{{ asset('css/mobile.css') }}" media="screen and (max-width: 420px)" rel="stylesheet">
 
     {{-- fontAwesome --}}
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
@@ -38,6 +38,7 @@
 
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     @stack('script')

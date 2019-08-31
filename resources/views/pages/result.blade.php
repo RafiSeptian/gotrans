@@ -20,29 +20,35 @@
 <section id="main-news">
     <div class="news-wrapper">
         <div class="content">
-            @foreach ($news as $data)
-            <img src="{{ asset('storage/' . $data->images) }}" alt="" class="news-img">
-            <ul class="header">
-                <li>
-                    <i class="fas fa-calendar-alt"></i> 7 Januari 2017
-                </li>
-                <li>
-                    <i class="fas fa-folder"></i> Jalur Transportasi
-                </li>
-                <li>
-                    <i class="fas fa-comments"></i> 10 Komentar
-                </li>
-            </ul>
-            <h1 class="news-title">
-                {{ $data->title }}
-            </h1>
-            <p class="content-desc">
-                {!! $data->content !!}
-            </p>
-            <a href="{{ route('news.show', $data->slug) }}" class="btn-more">
-                Selengkapnya
-            </a>
-            @endforeach
+            @if (count($news) >= 1)
+                @foreach ($news as $data)
+                <img src="{{ asset('storage/' . $data->images) }}" alt="" class="news-img">
+                <ul class="header">
+                    <li>
+                        <i class="fas fa-calendar-alt"></i> 7 Januari 2017
+                    </li>
+                    <li>
+                        <i class="fas fa-folder"></i> Jalur Transportasi
+                    </li>
+                    <li>
+                        <i class="fas fa-comments"></i> 10 Komentar
+                    </li>
+                </ul>
+                <h1 class="news-title">
+                    {{ $data->title }}
+                </h1>
+                <p class="content-desc">
+                    {!! $data->content !!}
+                </p>
+                <a href="{{ route('news.show', $data->slug) }}" class="btn-more">
+                    Selengkapnya
+                </a>
+                @endforeach
+                @else 
+                <h1 class="title not-found" style="">
+                    Tidak ada Berita Terkait
+                </h1>
+            @endif
         </div>
 
         @include('layouts.partials.news-ref')

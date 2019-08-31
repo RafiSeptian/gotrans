@@ -24,21 +24,20 @@
                 <img src="{{ asset('storage/' . $news->images) }}" alt="" class="news-img">
                 <ul class="header">
                     <li>
-                        <i class="fas fa-calendar-alt"></i> 7 Januari 2017
+                        <i class="fas fa-calendar-alt"></i> {{ \Jenssegers\Date\Date::parse($news->created_at)->format('d F Y') }}
                     </li>
                     <li>
                         <i class="fas fa-folder"></i> Jalur Transportasi
                     </li>
                     <li>
-                        <i class="fas fa-comments"></i> 10 Komentar
+                        <i class="fas fa-comments"></i> {{ count($news->comment) }} Komentar
                     </li>
                 </ul>
                 <h1 class="news-title">
                     {{ $news->title }}
                 </h1>
-                <p class="content-desc">
-                    {!! $news->content !!}
-                </p>
+                {!! $news->content !!}
+                
                 <a href="{{ route('news.show', $news->slug) }}" class="btn-more">
                         Selengkapnya
                 </a>

@@ -62,6 +62,7 @@ $('body').on('submit', '.form-comment', function (e) {
     e.preventDefault();
 
     const url = $(this).attr('action'),
+        form = $('.form-comment'),
         msg = $('#message').val(),
         id = $('#news_id').val();
 
@@ -87,6 +88,8 @@ $('body').on('submit', '.form-comment', function (e) {
         
                             $('section#comments .content').append(data);
                     });
+                    console.log(res);
+                    
                 }
             });
         }
@@ -99,7 +102,10 @@ $('body').on('submit', '.form-comment', function (e) {
             news_id: id
         },
         success: function (res) {
-            load_comment();
+            if (res.msg === 'created') {
+                form[0].reset();
+                load_comment();
+            }
         }
     });
 });

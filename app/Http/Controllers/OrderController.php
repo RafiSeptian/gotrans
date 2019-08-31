@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Notif;
+use App\Order;
+use App\Services;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,7 +16,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('layouts.forms.order');
+        $orders = Order::orderBy('created_at', 'desc')->where('transportation_id', auth()->user()->services->transportation_id)->where('status', 'waiting')->get();
+
+        return view('pages.order', compact('orders'));
     }
 
     /**
@@ -23,7 +28,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.forms.order');
     }
 
     /**
@@ -34,7 +39,41 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $notif = Notif::where('transportation_id', $request->transportation_id)->first();
+        $user = Notif::where('user_id', auth()->user()->id)->first();
+
+        Order::create([
+            'user_id' => auth()->user()->id,
+            'transportation_id' => $request->transportation_id,
+            'location_now' => $request->location_now,
+            'location_target' => $request->location_target,
+            'adult_passenger' => $request->adult_passenger,
+            'children_passenger' => $request->children_passenger
+        ]);
+
+        if (auth()->user()->role_id === 2) {
+            if ($user !== null) {
+                $user->update([
+                    'is_read' => false
+                ]);
+            } else {
+                Notif::create([
+                    'user_id' => $request->user_id,
+                ]);
+            }
+        }
+
+        if (auth()->user()->role_id === 3) {
+            if ($notif !== null) {
+                $notif->update([
+                    'is_read' => false
+                ]);
+            } else {
+                Notif::create([
+                    'transportation_id' => $request->transportation_id,
+                ]);
+            }
+        }
     }
 
     /**
@@ -68,7 +107,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        $order->update([
+            'services_id' => auth()->user()->services->id,
+            'status' => 'taken'
+        ]);
+
+        return response()->json([
+            'msg' => 'taken'
+        ]);
     }
 
     /**

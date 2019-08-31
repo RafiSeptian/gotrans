@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $news = News::all();
+        $news = News::with(['comment', 'category'])->orderBy('created_at', 'desc')->limit(3)->get();
 
         return view('home', compact('news'));
     }

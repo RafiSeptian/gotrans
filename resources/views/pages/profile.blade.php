@@ -5,13 +5,38 @@
           <div class="left">
                <ul>
                     <li>
-                         <a href="">
+                         <a href="{{ route('user.profile', $user->username) }}" class="text-black">
                               <i class="fas fa-user"></i> Profile
                          </a>
                     </li>
                     <li>
-                         <a href="">
+                         <a href="{{ route('history') }}" class="text-black">
                               <i class="fas fa-history"></i> Riwayat
+                         </a>
+                    </li>
+                    <li>
+                         <a href="{{ route('notif.index') }}" class="text-black" id="notif" data-user="{{ auth()->user()->role_id }}" 
+                              @if (auth()->user()->role_id === 3)
+                              data-link="{{ route('notif.update', $user->services->transportation_id) }}"
+                              @else
+                              data-link="{{ route('notif.update', $user->id) }}"
+                              @endif
+                              >
+                              <i class="fas fa-bell"></i> Notifikasi
+                         </a>
+                         @if (auth()->user()->role_id === 3)
+                              @if(\App\Notif::where('transportation_id', auth()->user()->services->transportation_id)->first()->is_read === 0)
+                             <div class="dot-notif"></div>
+                             @endif
+                         @else
+                             @if(\App\Notif::where('user_id', auth()->user()->id)->first()->is_read === 0)
+                             <div class="dot-notif"></div>
+                             @endif
+                         @endif
+                    </li>
+                    <li>
+                         <a href="{{ route('user.setting') }}" class="text-black">
+                              <i class="fas fa-cog"></i> Pengaturan
                          </a>
                     </li>
                     <li>
@@ -26,46 +51,7 @@
           </div>
 
           <div class="right">
-               <form action="{{ route('user.update', $user->id) }}" method="POST" class="form-profile" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    {{ method_field('PUT') }}
-                    <div class="img-profile">
-                         <img src="{{ asset('storage/' . $user->avatar) }}" alt="" id="img-user">
-                         <input type="file" name="avatar" id="avatar" onchange="preview(event)">
-                    </div>
-
-                    <div class="group-form">
-                         <label for="name">Nama lengkap</label>
-                         <div class="form-wrapper">
-                              <input type="text" name="name" id="name" value="{{ $user->name }}">
-                         </div>
-                    </div>
-
-                    <div class="group-form">
-                         <label for="name">Username</label>
-                         <div class="form-wrapper">
-                              <input type="text" name="username" id="username" value="{{ $user->username }}">
-                         </div>
-                    </div>
-
-                    <div class="group-form">
-                         <label for="name">E-mail</label>
-                         <div class="form-wrapper">
-                              <input type="email" name="email" id="email" value="{{ $user->email }}">
-                         </div>
-                    </div>
-                    
-                    <div class="group-form">
-                         <label for="name">Alamat</label>
-                         <div class="form-wrapper">
-                              <input type="text" name="address" id="address" value="{{ $user->address ? $user->address : '' }}">
-                         </div>
-                    </div>
-                    
-                    <button type="submit" class="btn-send p-right" style="margin-top:12px;">
-                         Simpan
-                    </button>
-               </form>
+               @include('layouts.partials.profile.profile')
           </div>
      </section>
 @endsection

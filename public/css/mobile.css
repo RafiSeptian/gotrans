@@ -13,6 +13,16 @@
     margin-top: 32px;
 }
 
+.sidebar-wrapper {
+    position: fixed;
+    top: 13%;
+    left: 0;
+}
+
+.sidebar-wrapper ul {
+    padding: 12px 25px;
+}
+
 h1.hero-title {
     font-size: 24px;
 }
@@ -29,6 +39,10 @@ h1.section-title2 {
 .wrapper h1.hero-title,
 .wrapper p {
     padding-bottom: 10px;
+}
+
+section#header {
+    margin-bottom: 50px;
 }
 
 section#intro,
@@ -54,7 +68,7 @@ section#intro {
 .intro-img img {
     width: 280px;
     height: 280px;
-    margin-bottom: 12px;
+    margin-bottom: 35px;
 }
 
 section#features .box-wrapper {
@@ -239,13 +253,21 @@ section#profile {
 }
 
 section#profile .right {
-    height: 78vh;
-    margin: 20px 0;
+    height: 100vh;
+    margin: 40px 0 20px 0;
     position: relative;
 }
 
 section#profile .left {
-    height: 21vh;
+    height: 34vh;
+}
+
+section#profile .left {
+    height: 46vh;
+}
+
+.profile-wrapper form {
+    height: 23vh;
 }
 
 section#profile .right .img-profile {
@@ -261,4 +283,8 @@ section#profile .right .img-profile img {
 
 section#profile .right .img-profile input {
     width: 100%;
+}
+
+.modal-content {
+    max-width: 300px;
 }

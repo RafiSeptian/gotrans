@@ -1,6 +1,6 @@
 <nav id="navbar">
     <div class="brand-logo">
-        <a href="#">
+        <a href="{{ route('home') }}">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="GoTrans">
         </a>
     </div>

@@ -47,9 +47,15 @@
                               <h2 class="sub-title">
                                    Ikuti Kami
                               </h2>
-                              <i class="fab fa-facebook"></i>
-                              <i class="fab fa-instagram"></i>
-                              <i class="fab fa-facebook"></i>
+                              <a href="" class="share-item">
+                                   <i class="fab fa-facebook"></i>
+                              </a>
+                              <a href="" class="share-item">
+                                   <i class="fab fa-instagram"></i>
+                              </a>
+                              <a href="" class="share-item">
+                                   <i class="fab fa-twitter"></i>
+                              </a>
                          </div>
           </div>
 

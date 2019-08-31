@@ -11,12 +11,6 @@
 |
 */
 
-use Jenssegers\Date\Date;
-
-Route::group(['prefix' => '/admin'], function () {
-    Voyager::routes();
-});
-
 Route::get('/', 'HomeController@index')->name('home');
 
 // Authentication
@@ -45,11 +39,16 @@ Route::get('/profile', function () {
     return view('pages.profile');
 })->name('profile');
 
+Route::post('/request', 'RequestController@store')->name('request.store');
+
 // order
 Route::resource('order', 'OrderController');
 
 // user
 Route::resource('user', 'UserController');
+
+// user
+Route::resource('notif', 'NotifController');
 
 // news routes
 Route::group(['prefix' => '/news'], function () {
@@ -62,10 +61,21 @@ Route::group(['prefix' => '/news'], function () {
 
 Route::any('/search', 'NewsController@search')->name('news.query');
 
-Route::get('/test', function () {
-    $date = Date::now()->format('dd F yy');
+// profile menu
+Route::group(['prefix' => '/users'], function () {
+    Route::get('/{username}', 'UserController@profile')->name('user.profile');
+});
+Route::get('/history', 'UserController@history')->name('history');
+Route::get('/history/download', 'UserController@getHistory')->name('history.get');
+Route::get('/driver', 'UserController@getChangeRole')->name('driver.get');
+Route::post('/driver', 'UserController@postChangeRole')->name('driver.post');
+Route::get('/setting', 'UserController@setting')->name('user.setting');
 
-    return $date;
+// group setting
+Route::group(['prefix' => '/setting'], function () {
+    Route::put('/{id}/update', 'ServicesController@update')->name('services.update');
 });
 
-// custom route voyager
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

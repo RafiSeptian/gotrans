@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notif;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;

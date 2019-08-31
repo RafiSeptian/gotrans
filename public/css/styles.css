@@ -26,7 +26,7 @@ body {
 
 #navbar .brand-logo img {
     grid-column: 1/2;
-    width: 100px;
+    width: 60px;
     height: 40px;
     justify-self: start;
 }
@@ -172,7 +172,7 @@ p.hero-text {
 
 section#intro {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     column-gap: 20px;
     color: var(--dark);
     padding: 70px 70px 0 70px;
@@ -355,12 +355,13 @@ section#profile .left ul {
     line-height: 30px;
 }
 
-.share i {
+.share a.share-item {
     font-size: 24px;
-    margin-left: 8px;
+    margin-left: 12px;
+    color: var(--white);
 }
 
-.share i:first-child {
+.share a.share-item:first-child {
     margin-left: 0;
 }
 
@@ -593,7 +594,7 @@ section#news {
 }
 
 .news-item {
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 12px;
 }
 
@@ -790,7 +791,8 @@ ul.breadcrumbs li.breadcrumbs-item a {
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 600px;
-    max-height: 700px;
+    max-height: 500px;
+    overflow-y: scroll;
     background-color: #fff;
     border-radius: 10px;
 }
@@ -837,7 +839,8 @@ form.form-order {
     background-color: #fff;
 }
 
-.group-form .form-wrapper input {
+.group-form .form-wrapper input,
+.group-form .form-wrapper select {
     border: none;
     outline: none;
     width: 100%;
@@ -1098,8 +1101,7 @@ section#profile .right .img-profile img {
     border-radius: 50%;
 }
 
-section#profile .left,
-section#profile .right {
+section#profile .left {
     width: 100%;
     background: var(--white);
     border: .5px solid var(--gray);
@@ -1107,14 +1109,18 @@ section#profile .right {
     border-radius: 7px;
 }
 
+section#profile .right {
+    width: 100%;
+    padding-left: 20px;
+}
+
 section#profile .left {
-    height: 30%;
+    height: 39vh;
 }
 
 section#profile .left ul li a {
     font-size: 16px;
     margin: auto;
-    color: var(--dark);
     line-height: 40px;
 }
 
@@ -1134,6 +1140,67 @@ section#profile .left ul li a i,
 .btn-logout i {
     margin-right: 7px;
     font-size: 22px;
+}
+
+.profile-wrapper {
+    padding: 7px;
+    margin: auto;
+}
+
+.profile-wrapper form {
+    height: 21vh;
+}
+
+.profile-wrapper:last-child form .btn-link {
+    background: var(--red);
+}
+
+.order-wrapper {
+    padding: 15px;
+}
+
+.order-wrapper:nth-child(even) {
+    background: var(--white-dark);
+}
+
+.right .detail-order {
+    padding-bottom: 10px;
+}
+
+.right .detail-order p {
+    padding: 0;
+    margin: 0;
+}
+
+.right .btn-link {
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+/* .profile-wrapper::after {
+    content: '';
+    display: block;
+    border-bottom: 1px solid var(--gray);
+    padding: 14px 0;
+    width: 100%;
+} */
+
+.profile-wrapper:last-child::after {
+    display: none;
+}
+
+.right .btn-link {
+    font-size: 14px;
+    text-transform: Capitalize;
+}
+
+.profile-wrapper .btn-link {
+    font-size: 14px;
+    text-transform: Capitalize;
+}
+
+.profile-wrapper p {
+    font-size: 14px;
 }
 
 .btn-logout {
@@ -1163,4 +1230,25 @@ section#main-news .news-wrapper .content img.news-img:first-child {
 
 .error-form {
     border: 1px solid var(--red);
+}
+
+button.btn-link {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+form.form-services .btn-send {
+    font-size: 14px;
+    padding: 5px 12px;
+}
+
+.dot-notif {
+    background: var(--primary);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
 }

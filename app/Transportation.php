@@ -12,4 +12,14 @@ class Transportation extends Model
     {
         return $this->hasMany(Services::class);
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function notif()
+    {
+        return $this->hasOne(Notif::class);
+    }
 }

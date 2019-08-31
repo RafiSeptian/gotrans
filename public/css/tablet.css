@@ -28,6 +28,10 @@ section#about .page-header::before {
     height: 100vh;
 }
 
+.intro-text {
+    text-align: center;
+}
+
 .wrapper {
     width: 70%;
     position: relative;
@@ -155,6 +159,14 @@ section#profile {
     padding: 100px 80px 70px 50px;
 }
 
+.profile-wrapper form {
+    height: 17vh;
+}
+
+section#profile .left {
+    height: 46vh;
+}
+
 @media (max-width: 680px) {
 
     .sidebar-wrapper {
@@ -163,7 +175,7 @@ section#profile {
     }
 
     .sidebar-wrapper ul {
-        padding: 20px 70px 0 70px;
+        padding: 30px 70px 0 70px;
     }
 
     .sidebar-wrapper ul li.sidebar-item a {

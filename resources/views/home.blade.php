@@ -6,21 +6,33 @@
 <section id="header">
     <div class="wrapper">
         <h1 class="hero-title">
-            Berkomitmen menciptakan keamanan dan kenyamanan bertransportasi
+            Memberikan layanan keamanan dan kenyamanan bertransportasi
         </h1>
         <p class="txt-shadow">
             Menginginkan transportasi yang aman dan nyaman? <br>
             <strong>GoTrans</strong> solusi untuk anda
         </p>
-        <button class="btn-start" id="start">
-            Mulai Sekarang
-        </button>
+        @if (Auth::check())
+            @if (auth()->user()->role_id === 2)
+                <button class="btn-start" id="start">
+                    Pesan Driver
+                </button>
+            @elseif(auth()->user()->role_id === 3)
+                <a href="{{ route('user.index') }}" class="btn-link">
+                    Lihat Profile
+                </a>
+            @endif
+        @else 
+            <button class="btn-start" id="btn-register">
+                Mulai Sekarang
+            </button>
+        @endif
     </div>
 </section>
 
 <section id="intro">
     <div class="intro-img">
-        <img src="{{ asset('assets/images/intro.svg') }}" alt="">
+        <img src="{{ asset('assets/images/logo.png') }}" alt="">
     </div>
                 <div class="intro-text">
                     <h1>
@@ -74,15 +86,18 @@
                 <img src="{{ asset('storage/'. $data->images) }}" alt="" class="news-img">
                 <div class="news-item">
                     <i class="far fa-calendar-alt"></i> {{ \Jenssegers\Date\Date::parse($data->created_at)->format('d F Y') }}
-                    <i class="far fa-folder"></i> Category
-                    <i class="far fa-comments"></i> 10 Comments
+                    <i class="far fa-folder"></i>
+                    @if ($data->category !== null)
+                        {{$data->category->name}}
+                    @else 
+                        Tidak ada
+                    @endif
+                    <i class="far fa-comments"></i> {{ count($data->comment) }} Comments
                 </div>
                 <h2 class="news-title">
                     {{ $data->title }}
                 </h2>
-                <p>
                     {!! $data->content !!}
-                </p>
                 <a href="{{ route('news.show', $data->slug) }}" class="btn-more">Selengkapnya</a>
             </div>
         @endforeach
@@ -170,7 +185,7 @@
         $('body').on('click', '#start', function () {
 
             $.ajax({
-                url: "{{ route('order.index') }}",
+                url: "{{ route('order.create') }}",
                 success: function(response){
                     $('.modal-body').html(response);
                     $('.modal-bg').css({
@@ -179,6 +194,19 @@
                 }
             });
 
+        });
+
+        $('body').on('click', '#btn-register', function(e){
+            e.preventDefault();
+
+            $.ajax({
+                url: "{{ route('register.show') }}",
+                dataType: 'html',
+                success: function(res){
+                    $('.modal-body').html(res);
+                    $('.modal-bg').show();
+                }
+            });
         });
     </script>
 @endpush

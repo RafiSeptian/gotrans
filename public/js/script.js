@@ -183,3 +183,169 @@ $('body').on('submit', '#form-register', function (e) {
         }
     });
 });
+
+$('body').on('submit', '.form-order', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr('action'),
+        form = $('.form-order').serialize();
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: form,
+        success: function (res) {
+            $('.modal-bg').hide();
+            Toast.fire({
+                type: 'success',
+                title: 'Berhasil Order, Harap tunggu driver..'
+            });
+        }
+    });
+});
+
+// user profile menu
+$('body').on('click', '.left li a', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr('href');
+
+    $.ajax({
+        url: url,
+        dataType: 'html',
+        success: function (res) {
+            $('section#profile .right').html(res);
+        }
+    });
+});
+
+
+// register driver
+
+$('body').on('click', '#register-driver', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr('href');
+
+    $.ajax({
+        url: url,
+        dataType: 'html',
+        success: function (res) {
+            $('.modal-body').html(res);
+
+            $('.modal-bg').show();
+        }
+    });
+
+});
+
+$('body').on('submit', 'form#changerole', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr('action'),
+        form = $('form#changerole');
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: new FormData(form[0]),
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            if (res.msg = 'created') {
+                $('.modal-bg').hide();
+
+                setTimeout(() => {
+                    Swal({
+                        type: 'success',
+                        title: 'Selamat !',
+                        text: 'Kamu sudah menjadi seorang driver sekarang',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }, 500);
+            }
+        }
+    });
+
+});
+
+$('body').on('submit', '.form-contact', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr('action'),
+        form = $('.form-contact');
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: form.serialize(),
+        success: function (res) {
+            if (res.msg === 'success') {
+
+                form[0].reset();
+
+                swal({
+                    type: 'success',
+                    title: 'Terkirim !',
+                    text: 'Terimakasih sudah memberikan masukan kepada kami',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        }
+    });
+})
+
+$('body').on('submit', '#form-take', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr('action'),
+        link = $('#form-take button').data('link'),
+        reloadOrder = function () {
+            $.ajax({
+                url: link,
+                dataType: 'html',
+                success: function (res) {
+                    $('section#profile .right').html(res);
+                }
+            });
+        }
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            '_method': 'PUT'
+        },
+        success: function (res) {
+            if (res.msg === 'taken') {
+                swal({
+                    type: 'success',
+                    title: 'Berhasil diambil',
+                    text: 'Segera jemput penumpangnya !',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                reloadOrder();
+            }
+        }
+    });
+})
+
+$('body').on('click', '#notif', function () {
+    const data = $(this).data('link');
+
+    $.ajax({
+        url: data,
+        type: 'POST',
+        data: {
+            '_method': 'PUT'
+        },
+        success: function (res) {
+            if (res.msg === updated) {
+
+            }
+        }
+    });
+});

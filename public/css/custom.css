@@ -36,6 +36,7 @@ p {
 
 .title {
     font-size: 20px;
+    font-family: 'Capriola'
 }
 
 .normal {
@@ -60,4 +61,12 @@ a:link {
 
 .br-gray {
     border: 1px solid var(--gray);
+}
+
+.menu-active {
+    color: var(--primary);
+}
+
+.bg-danger {
+    background: var(--red);
 }
