@@ -17,14 +17,19 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tablet.css') }}" media="screen and (max-width: 768px)" rel="stylesheet">
     <link href="{{ asset('css/mobile.css') }}" media="screen and (max-width: 420px)" rel="stylesheet">
 
     {{-- fontAwesome --}}
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
 </head>
-<body>
+<body onload="load()">
     <div id="app">
+
+        <div class="preloader">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="" class="img-preloader">
+        </div>
         
         @include('layouts.partials.navbar')
 
@@ -40,6 +45,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/wow.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     @stack('script')
 </body>

@@ -39,10 +39,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $notif = Notif::where('transportation_id', $request->transportation_id)->first();
-        $user = Notif::where('user_id', auth()->user()->id)->first();
+        // $notif = Notif::where('transportation_id', $request->transportation_id)->first();
+        // $user = Notif::where('user_id', auth()->user()->id)->first();
 
-        Order::create([
+        // ambil user yang memiliki services === transportasi yang diminta
+
+        $order = Order::create([
             'user_id' => auth()->user()->id,
             'transportation_id' => $request->transportation_id,
             'location_now' => $request->location_now,
@@ -51,29 +53,37 @@ class OrderController extends Controller
             'children_passenger' => $request->children_passenger
         ]);
 
-        if (auth()->user()->role_id === 2) {
-            if ($user !== null) {
-                $user->update([
-                    'is_read' => false
-                ]);
-            } else {
-                Notif::create([
-                    'user_id' => $request->user_id,
-                ]);
-            }
-        }
+        $services = Services::with(['user'])->where('major', 'LIKE', '%' . $request->location_target . '%')->where('transportation_id', $request->transportation_id)->get();
 
-        if (auth()->user()->role_id === 3) {
-            if ($notif !== null) {
-                $notif->update([
-                    'is_read' => false
-                ]);
-            } else {
-                Notif::create([
-                    'transportation_id' => $request->transportation_id,
-                ]);
-            }
+        foreach ($services as $key) {
+            $array = $key->user->id . ',';
+            Notif::whereIn('user_id', [$array])->update([
+                'is_read' => false
+            ]);
         }
+        // if (auth()->user()->role_id === 2) {
+        //     if ($user !== null) {
+        //         $user->update([
+        //             'is_read' => false
+        //         ]);
+        //     } else {
+        //         Notif::create([
+        //             'user_id' => $request->user_id,
+        //         ]);
+        //     }
+        // }
+
+        // if (auth()->user()->role_id === 3) {
+        //     if ($notif !== null) {
+        //         $notif->update([
+        //             'is_read' => false
+        //         ]);
+        //     } else {
+        //         Notif::create([
+        //             'transportation_id' => $request->transportation_id,
+        //         ]);
+        //     }
+        // }
     }
 
     /**

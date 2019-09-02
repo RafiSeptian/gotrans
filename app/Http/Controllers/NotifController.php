@@ -74,17 +74,23 @@ class NotifController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (auth()->user()->role_id === 3) {
-            $notif = Notif::where('transportation_id', $id)->first();
-            $notif->update([
-                'is_read' => true
-            ]);
-        } else {
-            $notif = Notif::where('user_id', $id)->first();
-            $notif->update([
-                'is_read' => true
-            ]);
-        }
+        // if (auth()->user()->role_id === 3) {
+        //     $notif = Notif::where('transportation_id', $id)->first();
+        //     $notif->update([
+        //         'is_read' => true
+        //     ]);
+        // } else {
+        //     $notif = Notif::where('user_id', $id)->first();
+        //     $notif->update([
+        //         'is_read' => true
+        //     ]);
+        // }
+
+        $notif = Notif::where('user_id', $id)->first();
+
+        $notif->update([
+            'is_read' => true
+        ]);
 
         return response()->json([
             'msg' => 'deleted'

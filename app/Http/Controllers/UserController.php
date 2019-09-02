@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DetailDriver;
 use App\Order;
 use App\Services;
-use App\Transportation;
 use Illuminate\Http\Request;
 use App\User;
 use PDF;
@@ -20,9 +19,8 @@ class UserController extends Controller
     public function index()
     {
         $user = User::findOrFail(auth()->user()->id);
-        $trans = Transportation::with(['notif'])->first();
 
-        return view('pages.profile', ['user' => $user, 'trans' => $trans]);
+        return view('pages.profile', ['user' => $user]);
     }
 
     /**

@@ -9,7 +9,7 @@
              </h1>
              <div class="bc-hero">
                     <a href="{{ route('home') }}" class="bc-link">
-                        Home
+                        Beranda
                     </a>
                     Berita
              </div>

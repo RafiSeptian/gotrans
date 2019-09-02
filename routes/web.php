@@ -11,6 +11,8 @@
 |
 */
 
+use App\Category;
+
 Route::get('/', 'HomeController@index')->name('home');
 
 // Authentication
@@ -47,7 +49,7 @@ Route::resource('order', 'OrderController');
 // user
 Route::resource('user', 'UserController');
 
-// user
+// notif
 Route::resource('notif', 'NotifController');
 
 // news routes
@@ -58,6 +60,9 @@ Route::group(['prefix' => '/news'], function () {
     Route::get('/comment/{id}', 'NewsController@getComment')->name('comment.get');
     Route::post('/comment', 'NewsController@postComment')->name('comment.post');
 });
+
+// category
+Route::get('/kategori/{name}', 'CategoryController@show')->name('category.show');
 
 Route::any('/search', 'NewsController@search')->name('news.query');
 
@@ -78,4 +83,12 @@ Route::group(['prefix' => '/setting'], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+});
+
+Route::get('test', function () {
+    $cate = Category::with(['news'])->where('name', 'transportasi')->first();
+
+    foreach ($cate->news as $key) {
+        echo $key->images;
+    }
 });

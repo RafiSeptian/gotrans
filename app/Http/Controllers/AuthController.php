@@ -57,6 +57,10 @@ class AuthController extends Controller
 
         $create = User::create($data);
 
+        $notif = Notif::create([
+            'user_id' => auth()->user()->id
+        ]);
+
         return response()->json([
             'msg' => 'success'
         ]);

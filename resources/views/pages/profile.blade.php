@@ -15,16 +15,12 @@
                          </a>
                     </li>
                     <li>
-                         <a href="{{ route('notif.index') }}" class="text-black" id="notif" data-user="{{ auth()->user()->role_id }}" 
-                              @if (auth()->user()->role_id === 3)
-                              data-link="{{ route('notif.update', $user->services->transportation_id) }}"
-                              @else
-                              data-link="{{ route('notif.update', $user->id) }}"
-                              @endif
+                         <a href="{{ route('notif.index') }}" class="text-black" id="notif"
+                              data-link="{{ route('notif.update', auth()->user()->id) }}"
                               >
                               <i class="fas fa-bell"></i> Notifikasi
                          </a>
-                         @if (auth()->user()->role_id === 3)
+                         {{-- @if (auth()->user()->role_id === 3)
                               @if(\App\Notif::where('transportation_id', auth()->user()->services->transportation_id)->first()->is_read === 0)
                              <div class="dot-notif"></div>
                              @endif
@@ -32,6 +28,9 @@
                              @if(\App\Notif::where('user_id', auth()->user()->id)->first()->is_read === 0)
                              <div class="dot-notif"></div>
                              @endif
+                         @endif --}}
+                         @if (\App\Notif::where('user_id', auth()->user()->id)->first()->is_read === 0)
+                              <div class="dot-notif"></div>
                          @endif
                     </li>
                     <li>

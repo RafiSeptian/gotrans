@@ -17,6 +17,12 @@ $('body').on('click', '.modal-header .fa-times', function () {
     });
 });
 
+function load() {
+    setTimeout(() => {
+        $('.preloader').fadeOut();
+    }, 1000);
+}
+
 // show sidebar
 $('body').on('click', '.toggle-menu i.fa-bars', function () {
     $('.toggle-menu i.fa-bars').css({
@@ -188,6 +194,7 @@ $('body').on('submit', '.form-order', function (e) {
     e.preventDefault();
 
     const url = $(this).attr('action'),
+        link = $('#order').data('link'),
         form = $('.form-order').serialize();
 
     $.ajax({

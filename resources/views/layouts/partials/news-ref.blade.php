@@ -7,7 +7,12 @@
      </form>
      <h3 class="sub-heading">Berita Lainnya</h3>
      <ul class="ref-ul">
-          <li class="ref-item">
+          @foreach (\App\News::OrderBy('created_at', 'desc')->limit(5)->get() as $news)
+               <li class="ref-item">
+                    <a href="{{ route('news.show', $news->slug) }}">{{ $news->title }}</a>
+               </li>
+          @endforeach
+          {{-- <li class="ref-item">
                <a href="#">Lorem Ipsum</a>
           </li>
           <li class="ref-item">
@@ -18,10 +23,7 @@
           </li>
           <li class="ref-item">
                <a href="#">Lorem Ipsum</a>
-          </li>
-          <li class="ref-item">
-               <a href="#">Lorem Ipsum</a>
-          </li>
+          </li> --}}
      </ul>
 
      <h3 class="sub-heading">Arsip</h3>
@@ -39,14 +41,10 @@
 
      <h3 class="sub-heading">Kategori</h3>
      <ul class="ref-ul">
-          <li class="ref-item">
-               <a href="#">Lorem Ipsum</a>
-          </li>
-          <li class="ref-item">
-               <a href="#">Lorem Ipsum</a>
-          </li>
-          <li class="ref-item">
-               <a href="#">Lorem Ipsum</a>
-          </li>
+          @foreach (\App\Category::all() as $category)
+               <li class="ref-item">
+                    <a href="{{ route('category.show', $category->name) }}">{{ ucfirst($category->name) }}</a>
+               </li>
+          @endforeach
      </ul>
 </div>
