@@ -26,7 +26,7 @@
           </li> --}}
      </ul>
 
-     <h3 class="sub-heading">Arsip</h3>
+     {{-- <h3 class="sub-heading">Arsip</h3>
      <ul class="ref-ul">
           <li class="ref-item">
                <a href="#">September 2017</a>
@@ -37,7 +37,7 @@
           <li class="ref-item">
                <a href="#">Desember 2017</a>
           </li>
-     </ul>
+     </ul> --}}
 
      <h3 class="sub-heading">Kategori</h3>
      <ul class="ref-ul">

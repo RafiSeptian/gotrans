@@ -5,14 +5,41 @@ namespace App\Http\Controllers;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\News;
+use Jenssegers\Date\Date as Date;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $data = News::with(['comment'])->get();
+        $data = News::with(['comment', 'category'])->orderBy('created_at', 'desc')->paginate(3);
 
         return view('pages.news', compact('data'));
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        $data['slug'] = str_slug($request->title, '-');
+
+        array_push($data, ['user_id' => auth()->user()->id]);
+
+        $time = Date::now()->format('FY');
+
+        if ($request->hasFile('images')) {
+            $images = $request->file('images')->store('news/' . $time . '/');
+        }
+
+        News::create([
+            'user_id' => auth()->user()->id,
+            'category_id' => $request->category_id,
+            'slug' => str_slug($request->title),
+            'title' => $request->title,
+            'content' => $request->content,
+            'images' => $images
+        ]);
+
+        return redirect('/admin/news');
     }
 
     public function show($slug)
@@ -26,7 +53,7 @@ class NewsController extends Controller
 
     public function search(Request $request)
     {
-        $news = News::where('title', 'LIKE', '%' . $request->q . '%')->get();
+        $news = News::where('title', 'LIKE', '%' . $request->q . '%')->orWhere('content', 'LIKE', '%' . $request->q . '%')->paginate(3);
 
         return view('pages.result', compact('news'));
     }

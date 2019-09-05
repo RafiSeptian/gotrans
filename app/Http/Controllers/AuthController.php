@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Notif;
 use Illuminate\Http\Request;
 use Auth;
@@ -43,7 +44,7 @@ class AuthController extends Controller
         return view('layouts.forms.register');
     }
 
-    public function postRegister(Request $request)
+    public function postRegister(RegisterRequest $request)
     {
         $data = $request->all();
 
@@ -58,7 +59,7 @@ class AuthController extends Controller
         $create = User::create($data);
 
         $notif = Notif::create([
-            'user_id' => auth()->user()->id
+            'user_id' => $create->id
         ]);
 
         return response()->json([

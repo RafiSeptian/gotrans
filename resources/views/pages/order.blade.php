@@ -21,8 +21,37 @@
      @else
           <h3 class="title">Tidak ada notifikasi</h3>
      @endif
+@endif
 
-@else 
+@if (auth()->user()->role_id === 2)
+     @if (count($users) !== 0)
+     @foreach ($users as $order)
+          @if ($order->status === 'taken')
+          <div class="order-wrapper">
+               <h3 class="title">
+               Tujuan: {{ $order->location_target}}
+               </h3>
+               <div class="detail-order">
+                    <p>Telah diambil oleh <strong>{{ $order->services->user->name }}</strong>. Harap untuk menunggu</p>
+               </div>
+          </div>
+          @else
+               <div class="order-wrapper">
+                    <h3 class="title">
+                    Tujuan: {{ $order->location_target}}
+                    </h3>
+                    <div class="detail-order">
+                         <p>Belum ada yang mengambil orderanmu</p>
+                    </div>
+               </div>
+          @endif
+     @endforeach
+     @else
+     <h3 class="title">Tidak ada notifikasi</h3>
+     @endif
+@endif
+
+{{-- @else 
      @if (count($users) !== 0)
           @foreach ($users as $order)
                @if ($order->status === 'taken')
@@ -48,7 +77,12 @@
      @else
           <h3 class="title">Tidak ada notifikasi</h3>
      @endif
-@endif
+@endif --}}
+
+
+
+
+
 {{-- @else
      @if (count($users) !== 0)
      @foreach ($users as $order)

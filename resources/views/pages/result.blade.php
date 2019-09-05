@@ -25,13 +25,13 @@
                 <img src="{{ asset('storage/' . $data->images) }}" alt="" class="news-img">
                 <ul class="header">
                     <li>
-                        <i class="fas fa-calendar-alt"></i> 7 Januari 2017
+                        <i class="fas fa-calendar-alt"></i> {{ \Jenssegers\Date\Date::parse($data->created_at)->format('d F Y') }}
                     </li>
                     <li>
-                        <i class="fas fa-folder"></i> Jalur Transportasi
+                        <i class="fas fa-folder"></i> {{ ucfirst($data->category->name) }}
                     </li>
                     <li>
-                        <i class="fas fa-comments"></i> 10 Komentar
+                        <i class="fas fa-comments"></i> {{ count($data->comment) }} Komentar
                     </li>
                 </ul>
                 <h1 class="news-title">
@@ -49,6 +49,10 @@
                     Tidak ada Berita Terkait
                 </h1>
             @endif
+
+            <div class="pagination">
+                {{ $news->links() }}
+            </div>
         </div>
 
         @include('layouts.partials.news-ref')

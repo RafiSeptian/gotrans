@@ -6,7 +6,7 @@
                </div>
           </div>
           <div class="group-form">
-               <label for="text">Username</label>
+               <label for="username">Username</label>
                <div class="form-wrapper">
                     <input type="text" name="username" id="username">
                </div>

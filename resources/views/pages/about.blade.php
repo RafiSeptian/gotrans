@@ -9,7 +9,7 @@
                </h1>
                <div class="bc-hero">
                       <a href="{{ route('home') }}" class="bc-link">
-                           Home
+                           Beranda
                       </a>
                       Tentang
                </div>
@@ -27,7 +27,12 @@
                          Visi GoTrans
                     </h2>
                     <p>
-                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos quia iure corporis, doloribus possimus perferendis soluta enim deleniti, fugiat porro autem quisquam, incidunt aliquam voluptate ipsum tenetur? Alias, veniam doloremque.
+                         Visi GoTrans antara lain: 
+                         <ul>
+                              <li>Mengurangi antrian transportasi di pinggir jalan</li>
+                              <li>Memudahkan masyarakat untuk mendapatkan transportasi</li>
+                              <li>Mempermudah masyarakat mendapatkan layanan transportasi terbaik</li>
+                         </ul>
                     </p>
                </div>
 
@@ -36,7 +41,12 @@
                          Misi GoTrans
                     </h2>
                     <p>
-                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos quia iure corporis, doloribus possimus perferendis soluta enim deleniti, fugiat porro autem quisquam, incidunt aliquam voluptate ipsum tenetur? Alias, veniam doloremque.
+                         Misi GoTrans antara
+                         <ul>
+                              <li>Menjadikan GoTrans sebagai jasa transportasi termudah</li>
+                              <li>Menghadirkan kenyamanan bagi penikmat transportasi</li>
+                              <li>Meningkatkan pendapatan sopir transportasi umum</li>
+                         </ul>
                     </p>
                </div>
           </div>
@@ -54,7 +64,7 @@
                <div class="dev-1">
                     <img src="{{ asset('assets/images/dev-1.png') }}" alt="" class="img-dev">
                     <h3 class="title bold">
-                         Anna Marie
+                         Indah Permatasari
                     </h3>
                     <p class="normal">
                          CEO
@@ -64,7 +74,7 @@
                <div class="dev-2">
                     <img src="{{ asset('assets/images/dev-2.png') }}" alt="" class="img-dev">
                     <h3 class="title bold">
-                         John Cage
+                         Helmi
                     </h3>
                     <p class="normal">
                          Back-End Developer
@@ -74,7 +84,7 @@
                <div class="dev-3">
                     <img src="{{ asset('assets/images/dev-3.png') }}" alt="" class="img-dev">
                     <h3 class="title bold">
-                         Emmy Wilson
+                         Emmy
                     </h3>
                     <p class="normal">
                          Front-End Developer
@@ -84,7 +94,7 @@
                <div class="dev-3">
                     <img src="{{ asset('assets/images/dev-4.png') }}" alt="" class="img-dev">
                     <h3 class="title bold">
-                         David Simon
+                         David
                     </h3>
                     <p class="normal">
                          Analyze

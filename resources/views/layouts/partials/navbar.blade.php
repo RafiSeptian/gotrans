@@ -28,7 +28,7 @@
             </li>
             @else 
             <li class="navbar-li">
-                <a href="{{ route('user.index') }}">
+                <a href="{{ route('user.show', auth()->user()['username']) }}">
                     <img src="{{ Voyager::image(Auth::user()->avatar) }}" alt="" class="img-user">
                 </a>
             </li>

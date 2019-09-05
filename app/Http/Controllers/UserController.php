@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\DetailDriver;
+use App\Http\Requests\RegisterDriverRequest;
 use App\Order;
 use App\Services;
 use Illuminate\Http\Request;
 use App\User;
 use PDF;
+use Auth;
+use Jenssegers\Date\Date as Date;
 
 class UserController extends Controller
 {
@@ -16,11 +19,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('custom_auth');
+    }
+
     public function index()
     {
-        $user = User::findOrFail(auth()->user()->id);
+        // $user = User::findOrFail(auth()->user()->id);
 
-        return view('pages.profile', ['user' => $user]);
+        // return view('pages.profile', ['user' => $user]);
     }
 
     /**
@@ -50,9 +59,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($username)
     {
-        //
+        $user = User::where('username', $username)->first();
+
+        return view('pages.profile', ['user' => $user]);
     }
 
     /**
@@ -80,7 +91,9 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        $data['password'] = bcrypt($request->password);
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
 
         if ($request->file('avatar')) {
             $data['avatar'] = $request->file('avatar')->store('users');
@@ -88,7 +101,9 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('user.index');
+        return response()->json([
+            'msg' => 'updated'
+        ]);
     }
 
     /**
@@ -101,7 +116,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $user->forceDelete();
         $user->delete();
+
+        return redirect()->route('home');
     }
 
     public function profile($username)
@@ -123,24 +141,26 @@ class UserController extends Controller
         return view('layouts.forms.changerole');
     }
 
-    public function postChangeRole(Request $request)
+    public function postChangeRole(RegisterDriverRequest $request)
     {
+        $time = Date::now()->format('FY');
+
         $user = User::findOrFail(auth()->user()->id);
 
         if ($request->hasFile('ktp')) {
-            $ktp = $request->file('ktp')->store('detail_driver/ktp');
+            $ktp = $request->file('ktp')->store('detail-drivers/' . $time . '/');
         }
         if ($request->hasFile('sim')) {
-            $sim = $request->file('sim')->store('detail_driver/sim');
+            $sim = $request->file('sim')->store('detail-drivers/' . $time . '/');
         }
         if ($request->hasFile('stnk')) {
-            $stnk = $request->file('stnk')->store('detail_driver/stnk');
+            $stnk = $request->file('stnk')->store('detail-drivers/' . $time . '/');
         }
         if ($request->hasFile('bpkb')) {
-            $bpkb = $request->file('bpkb')->store('detail_driver/bpkb');
+            $bpkb = $request->file('bpkb')->store('detail-drivers/' . $time . '/');
         }
         if ($request->hasFile('foto_kendaraan')) {
-            $foto = $request->file('foto_kendaraan')->store('detail_driver/foto_kendaraan');
+            $foto = $request->file('foto_kendaraan')->store('detail-drivers/' . $time . '/');
         }
 
         $change = $user->update([

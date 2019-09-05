@@ -24,5 +24,9 @@ class ServicesController extends Controller
         $services->update([
             'major' => $request->major
         ]);
+
+        return response()->json([
+            'msg' => 'updated'
+        ]);
     }
 }

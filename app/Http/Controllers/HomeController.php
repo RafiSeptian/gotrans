@@ -18,6 +18,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function __construct()
+    {
+        $this->middleware('isNotAdmin');
+    }
     public function index()
     {
         $news = News::with(['comment', 'category'])->orderBy('created_at', 'desc')->limit(3)->get();

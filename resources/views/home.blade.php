@@ -17,7 +17,7 @@
             Pesan Driver
         </button>
         @elseif(auth()->user()->role_id === 3)
-        <a href="{{ route('user.index') }}" class="btn-link">
+        <a href="{{ route('user.show', auth()->user()->username) }}" class="btn-link">
             Lihat Profile
         </a>
         @endif
@@ -38,11 +38,7 @@
             Apa itu GoTrans ?
         </h1>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto laudantium sed dignissimos, at laboriosam
-            excepturi similique, ab obcaecati quis iste error quibusdam iure molestias magni, expedita officiis sint
-            eligendi rem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, cumque. Delectus neque
-            reiciendis in sit, quasi ea nulla optio pariatur possimus quidem blanditiis saepe, nam esse quae labore iure
-            culpa.
+            GoTrans merupakan sebuah aplikasi layanan masyarakat berbasis web yang bergerak dibidang transportasi, GoTrans bertujuan untuk memberikan kenyamanan bagi sopir transportasi maupun masyarakat sebagai penikmat jasa transportasi, karena dalam aplikasi ini tersedia fitur-fitur yang dapat mendukung kegiatan-kegiatan transportasi.
         </p>
     </div>
 </section>
@@ -55,8 +51,7 @@
                 Keamanan Terjamin
             </h3>
             <p class="features-detail">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta minima voluptas vel quia cumque iste
-                repellat nemo earum.
+                Keamanan sangat terjamin karena para sopir dalam aplikasi ini sudah ter-verifikasi
             </p>
         </div>
         <div class="item-two">
@@ -65,18 +60,16 @@
                 Berita terbaru
             </h3>
             <p class="features-detail">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum similique eaque voluptatibus. Eligendi in
-                eveniet, voluptates.
+                Untuk menambah wawasan masyarakat, kami menyediakan fitur berita untuk memberitahu masyarakat umum tentang transportasi.
             </p>
         </div>
         <div class="item-three">
             <img src="{{ asset('assets/images/choose.svg') }}" alt="">
             <h3 class="features-title">
-                Bebas memilih driver
+                Lihat Riwayat
             </h3>
             <p class="features-detail">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum similique eaque voluptatibus. Eligendi in
-                eveniet, voluptates.
+                Dalam aplikasi ini kita bisa melihat riwayat transportasi yang kita lakukan
             </p>
         </div>
     </div>
@@ -95,16 +88,15 @@
                 {{ \Jenssegers\Date\Date::parse($data->created_at)->format('d F Y') }}
                 <i class="far fa-folder"></i>
                 @if ($data->category !== null)
-                {{$data->category->name}}
+                {{ ucfirst($data->category->name) }}
                 @else
                 Tidak ada
                 @endif
-                <i class="far fa-comments"></i> {{ count($data->comment) }} Comments
+                <i class="far fa-comments"></i> {{ count($data->comment) }} Komentar
             </div>
             <h2 class="news-title">
                 {{ $data->title }}
             </h2>
-            {!! $data->content !!}
             <a href="{{ route('news.show', $data->slug) }}" class="btn-more">Selengkapnya</a>
         </div>
         @endforeach
@@ -117,8 +109,8 @@
                     Kami berupaya untuk menjadikan transpotasi di Subang menjadi lebih tertib dan nyaman dalam melayani masyarakat
                     Subang
                 </p>
-                <img src="{{ asset('assets/images/people3.png') }}" alt="" class="img-ceo">
-                <h3 class="name-ceo">Kang Ujang</h3>
+                <img src="{{ asset('assets/images/dev-1.png') }}" alt="" class="img-ceo">
+                <h3 class="name-ceo">Indah Permatasari</h3>
                 <h5 class="position">
                     CEO GoTrans
                 </h5>
@@ -127,28 +119,52 @@
 
 <section id="review-user">
     <div class="review-text">
-        <p>
-            &quot;
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam quasi nihil sapiente, dolor ad quibusdam
-            exercitationem dignissimos corporis magni nulla alias harum quod repellat natus omnis dolore recusandae!
-            Eaque, doloribus.
-            &quot;
-        </p>
-        <h3 class="name-user">
-            Emmy
-        </h3>
+        <div class="content active" data-text="1">
+            <p>
+                &quot;
+                Sangat memudahkan 
+                &quot;
+            </p>
+            <h3 class="name-user">
+                Angela
+            </h3>
+        </div>
+        <div class="content" data-text="2">
+            <p>
+                &quot;
+                Horee , Sopir transportasi jadi jarang ngetem
+                &quot;
+            </p>
+            <h3 class="name-user">
+                Emmy
+            </h3>
+        </div>
+        <div class="content" data-text="3">
+            <p>
+                &quot;
+                    Mantap sekali !
+                &quot;
+            </p>
+            <h3 class="name-user">
+                Alex
+            </h3>
+        </div>
     </div>
 
     <div class="review-profile">
-        <img src="{{ asset('assets/images/people1.png') }}" alt="">
-        <img src="{{ asset('assets/images/people2.png') }}" alt="">
-        <img src="{{ asset('assets/images/people3.png') }}" alt="">
+        <img src="{{ asset('assets/images/people1.png') }}" class="active" alt="" data-id="1">
+        <img src="{{ asset('assets/images/people2.png') }}" alt="" data-id="2">
+        <img src="{{ asset('assets/images/people3.png') }}" alt="" data-id="3">
     </div>
 </section>
 @endsection
 
 @push('script')
 <script>
+
+    // owl carousel
+    
+
     // WOW plugin
     const wow = new WOW();
     wow.init();

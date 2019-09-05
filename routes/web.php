@@ -11,7 +11,8 @@
 |
 */
 
-use App\Category;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -59,11 +60,11 @@ Route::group(['prefix' => '/news'], function () {
     Route::get('/{slug}', 'NewsController@show')->name('news.show');
     Route::get('/comment/{id}', 'NewsController@getComment')->name('comment.get');
     Route::post('/comment', 'NewsController@postComment')->name('comment.post');
+    // category
+    Route::get('/kategori/{name}', 'CategoryController@show')->name('category.show');
 });
 
-// category
-Route::get('/kategori/{name}', 'CategoryController@show')->name('category.show');
-
+// search
 Route::any('/search', 'NewsController@search')->name('news.query');
 
 // profile menu
@@ -83,12 +84,19 @@ Route::group(['prefix' => '/setting'], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
+    // custom
+    Route::post('/news', 'NewsController@store')->name('voyager.news.store');
 });
 
 Route::get('test', function () {
-    $cate = Category::with(['news'])->where('name', 'transportasi')->first();
+    $order = User::findOrFail(21);
 
-    foreach ($cate->news as $key) {
-        echo $key->images;
-    }
+    $order->update([
+        'password' => bcrypt('ricard17')
+    ]);
 });
+
+// Route::get('logout', function () {
+//     Auth::logout();
+// });

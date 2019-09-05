@@ -296,6 +296,7 @@ section#intro {
     width: 140px;
     height: 140px;
     margin-bottom: 14px;
+    border-radius: 50%;
 }
 
 .convincing .name-ceo {
@@ -331,14 +332,29 @@ section#intro {
     margin-bottom: 25px;
 }
 
+.review-text .content {
+    display: none;
+}
+
+.review-text .content.active {
+    display: block;
+    animation: fadeIn 1s;
+}
+
 .review-profile {
     display: inline;
 }
 
 .review-profile img {
+    cursor: pointer;
     width: 80px;
     height: 80px;
     margin-left: 24px;
+    opacity: .7;
+}
+
+.review-profile img.active {
+    opacity: 1;
 }
 
 footer {
@@ -352,7 +368,7 @@ footer {
 
 footer .content {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     justify-content: center;
     column-gap: 15px;
     padding: 40px;
@@ -371,6 +387,10 @@ h2.sub-title {
 section#profile .left ul {
     padding: 0;
     list-style: none;
+}
+
+.about ul li a {
+    color: var(--white);
 }
 
 .about ul li,
@@ -466,6 +486,7 @@ section#detail-news {
 
 #main-news .news-wrapper,
 #detail-news .news-wrapper {
+    position: relative;
     display: grid;
     grid-template-columns: 70% 30%;
     justify-items: start;
@@ -602,12 +623,15 @@ section#news {
 }
 
 .news-wrapper {
-    position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     justify-items: center;
     column-gap: 17px;
     row-gap: 17px;
+}
+
+.news-content {
+    width: 100%;
 }
 
 .news-content img {
@@ -825,13 +849,13 @@ ul.breadcrumbs li.breadcrumbs-item a {
     padding: 17px 20px;
 }
 
-.modal-header {
+im .modal-header {
     display: flex;
 }
 
 .modal-header i.fa-times {
     cursor: pointer;
-    transition: all 1s;
+    transition: all .5s;
 }
 
 .modal-header i.fa-times:hover {
@@ -1029,7 +1053,7 @@ section#contact::before {
 
 .contact-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     column-gap: 20px;
     justify-items: center;
     padding: 120px 120px 0 120px;
@@ -1063,11 +1087,10 @@ section#contact::before {
     padding: 80px 120px;
 }
 
-.maps img {
+.maps iframe {
     width: 100%;
-    height: 470px;
+    height: 550px;
     border-radius: 5px;
-    box-shadow: 2px 2px 12px var(--dark);
 }
 
 .form-wrapper textarea {
@@ -1138,7 +1161,7 @@ section#profile .right {
 }
 
 section#profile .left {
-    height: 41.5vh;
+    height: 34vh;
 }
 
 section#profile .left ul li a {
@@ -1274,4 +1297,21 @@ form.form-services .btn-send {
     border-radius: 50%;
     display: inline-block;
     margin: 0 5px;
+}
+
+.pagination {
+    padding-top: 14px;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-send:disabled {
+    background: var(--secondary);
+}
+
+#table-history {
+    margin-top: 20px;
 }

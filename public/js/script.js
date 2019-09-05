@@ -78,15 +78,15 @@ $('body').on('click', '#btn-login, #already', function (e) {
         success: function (response) {
             $('.modal-body').html(response);
 
-            $('.modal-bg').css({
-                'display': 'block'
-            });
+            $('.modal-header h1').text('Login');
+
+            $('.modal-bg').fadeIn();
         }
     });
 });
 
 // show modal register
-$('body').on('click', '#sign-up', function (e) {
+$('body').on('click', '#sign-up, #btn-register', function (e) {
     e.preventDefault();
 
     const url = $(this).attr('href');
@@ -96,9 +96,9 @@ $('body').on('click', '#sign-up', function (e) {
         success: function (response) {
             $('.modal-body').html(response);
 
-            $('.modal-bg').css({
-                'display': 'block'
-            });
+            $('.modal-header h1').text('Daftar');
+
+            $('.modal-bg').fadeIn();
         }
     });
 });
@@ -138,7 +138,7 @@ $('body').on('submit', '#form-login', function (e) {
 
                 Toast.fire({
                     type: 'success',
-                    title: 'Signed in successfully'
+                    title: 'Login berhasil'
                 });
 
                 window.location.reload();
@@ -156,7 +156,7 @@ $('body').on('submit', '#form-login', function (e) {
 
                     const message = $('<p>', err);
                     message.html('Data tidak cocok dengan akun manapun');
-                    $('.forgot-pass').prepend(message);
+                    $('.sign-up').prepend(message);
                 }
 
                 $('p').hasClass('invalid-msg') ? '' : err();
@@ -172,6 +172,10 @@ $('body').on('submit', '#form-register', function (e) {
     const url = $(this).attr('action'),
         form = $('#form-register');
 
+    form.find('span.text-danger').remove();
+    $('.form-wrapper').removeAttr('style');
+    $('.group-form label').removeClass('text-danger');
+
     $.ajax({
         url: url,
         type: 'POST',
@@ -184,6 +188,17 @@ $('body').on('submit', '#form-register', function (e) {
                     type: 'success',
                     title: 'Sukses',
                     text: 'Silahkan login untuk melanjutkan'
+                });
+            }
+        },
+        error: function (xhr) {
+            const errors = xhr.responseJSON;
+
+            if ($.isEmptyObject(errors.errors == false)) {
+                $.each(errors.errors, function (key, value) {
+                    $(`.group-form label[for=` + key + `]`).addClass('text-danger');
+                    $('#' + key)
+                        .closest('.form-wrapper').attr('style', 'border: 1px solid var(--red)').append('<span class="text-danger">' + value + '</span>');
                 });
             }
         }
@@ -252,6 +267,10 @@ $('body').on('submit', 'form#changerole', function (e) {
     const url = $(this).attr('action'),
         form = $('form#changerole');
 
+    form.find('span.text-danger').remove();
+    $('.form-wrapper').removeAttr('style');
+    $('.group-form label').removeClass('text-danger');
+
     $.ajax({
         url: url,
         type: 'POST',
@@ -266,11 +285,23 @@ $('body').on('submit', 'form#changerole', function (e) {
                     Swal({
                         type: 'success',
                         title: 'Selamat !',
-                        text: 'Kamu sudah menjadi seorang driver sekarang',
+                        text: 'Kamu sudah menjadi Driver sekarang',
                         showConfirmButton: false,
                         timer: 2000
                     });
                 }, 500);
+            }
+        },
+
+        error: function (xhr) {
+            const errors = xhr.responseJSON;
+
+            if ($.isEmptyObject(errors) == false) {
+                $.each(errors.errors, function (key, value) {
+                    $(`.group-form label[for=` + key + `]`).addClass('text-danger');
+                    $('#' + key)
+                        .closest('.form-wrapper').attr('style', 'border: 1px solid var(--red)').append('<span class="text-danger">' + value + '</span>');
+                });
             }
         }
     });
@@ -352,6 +383,113 @@ $('body').on('click', '#notif', function () {
         success: function (res) {
             if (res.msg === updated) {
 
+            }
+        }
+    });
+});
+
+// testimonial
+$('body').on('click', '.review-profile img', function () {
+
+    $('.content').hasClass('active') ? $('.content').removeClass('active') : '';
+    $('.review-profile img').removeClass('active');
+
+    $(this).addClass('active')
+
+    const data = $(this).data('id');
+
+    const con = $(`.content[data-text=` + data + `]`);
+
+    con.addClass('active');
+});
+
+$('body').on('click', '#btn-delete', function (event) {
+    event.preventDefault();
+
+    var me = $(this),
+        form = $('#form-delete-account'),
+        url = form.attr('action');
+
+    Swal.fire({
+        type: 'warning',
+        title: 'Hapus Akun Ini ?',
+        text: 'Akun Akan Terhapus Permanen !',
+        confirmButtonColor: '#FF0000',
+        confirmButtonText: 'Ya, Hapus ini!',
+        showCancelButton: true,
+        focusConfirm: false,
+        cancelButtonColor: '#C0C0C0',
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    '_method': 'DELETE'
+                },
+                success: function (response) {
+                    swal({
+                        type: 'success',
+                        title: 'Data Terhapus!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                    });
+                }
+
+            })
+        }
+    })
+
+});
+
+$('body').on('submit', '.form-services', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr('action'),
+        form = $('.form-services').serialize();
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: form,
+        success: function (res) {
+            if (res.msg === 'updated') {
+                swal({
+                    type: 'success',
+                    title: 'Jurusan telah diperbarui',
+                    showConfirmButton: false,
+                    timer: 3000,
+                });
+
+                window.location.reload();
+            }
+        }
+    });
+});
+
+// update profile
+$('body').on('submit', '#profile-form', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr('action'),
+        form = $('#profile-form');
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: new FormData(form[0]),
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            if (res.msg === 'updated') {
+                swal({
+                    type: 'success',
+                    title: 'Profile telah diperbarui',
+                    showConfirmButton: false,
+                    timer: 3000,
+                });
+
+                window.location.reload();
             }
         }
     });

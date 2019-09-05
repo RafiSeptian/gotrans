@@ -13,9 +13,9 @@
           </div>
      </div>
 
-     <div class="forgot-pass">
+     {{-- <div class="forgot-pass">
           <a href="#">Lupa Password ?</a>
-     </div>
+     </div> --}}
 
      <div class="sign-up">
           <a href="{{ route('register.show') }}" id="sign-up">Belum punya akun ?</a>

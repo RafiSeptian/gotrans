@@ -9,30 +9,34 @@
                               <i class="fas fa-user"></i> Profile
                          </a>
                     </li>
-                    <li>
-                         <a href="{{ route('history') }}" class="text-black">
-                              <i class="fas fa-history"></i> Riwayat
-                         </a>
-                    </li>
-                    <li>
-                         <a href="{{ route('notif.index') }}" class="text-black" id="notif"
-                              data-link="{{ route('notif.update', auth()->user()->id) }}"
-                              >
-                              <i class="fas fa-bell"></i> Notifikasi
-                         </a>
-                         {{-- @if (auth()->user()->role_id === 3)
-                              @if(\App\Notif::where('transportation_id', auth()->user()->services->transportation_id)->first()->is_read === 0)
-                             <div class="dot-notif"></div>
-                             @endif
-                         @else
-                             @if(\App\Notif::where('user_id', auth()->user()->id)->first()->is_read === 0)
-                             <div class="dot-notif"></div>
-                             @endif
-                         @endif --}}
-                         @if (\App\Notif::where('user_id', auth()->user()->id)->first()->is_read === 0)
+                    @if (auth()->user()->role_id === 2)
+                         <li>
+                              <a href="{{ route('history') }}" class="text-black">
+                                   <i class="fas fa-history"></i> Riwayat
+                              </a>
+                         </li>
+                    @endif
+                    @if (auth()->user()->role_id === 3)
+                         <li>
+                              <a href="{{ route('notif.index') }}" class="text-black" id="notif"
+                                   data-link="{{ route('notif.update', auth()->user()->id) }}"
+                                   >
+                                   <i class="fas fa-bell"></i> Orderan
+                              </a>
+                              {{-- @if (auth()->user()->role_id === 3)
+                                   @if(\App\Notif::where('transportation_id', auth()->user()->services->transportation_id)->first()->is_read === 0)
                               <div class="dot-notif"></div>
-                         @endif
-                    </li>
+                              @endif
+                              @else
+                              @if(\App\Notif::where('user_id', auth()->user()->id)->first()->is_read === 0)
+                              <div class="dot-notif"></div>
+                              @endif
+                              @endif --}}
+                              @if (\App\Notif::where('user_id', auth()->user()->id)->first()->is_read === 0)
+                                   <div class="dot-notif"></div>
+                              @endif
+                         </li>
+                    @endif
                     <li>
                          <a href="{{ route('user.setting') }}" class="text-black">
                               <i class="fas fa-cog"></i> Pengaturan

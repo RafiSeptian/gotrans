@@ -21,8 +21,16 @@
                               Tentang Kami
                               </h2>
                               <ul>
-                                   <li>Tentang Perusahaan</li>
-                                   <li>Tentang Tim</li>
+                                   <li>
+                                        <a href="{{ route('about') }}">
+                                             Tentang Perusahaan
+                                        </a>
+                                   </li>
+                                   <li>
+                                        <a href="{{ route('about') }}">
+                                             Tentang Tim
+                                        </a>
+                                   </li>
                               </ul>
                          </div>
                
@@ -38,7 +46,7 @@
                                              Telp: 0231-3012
                                    </li>
                                    <li>
-                                             Telp: 0231-3012
+                                             Alamat: Jl.Ahmad Yani No.35 Jakarta Pusat
                                    </li>
                               </ul>
                          </div>
@@ -47,13 +55,13 @@
                               <h2 class="sub-title">
                                    Ikuti Kami
                               </h2>
-                              <a href="" class="share-item">
+                              <a href="https://web.facebook.com/" class="share-item">
                                    <i class="fab fa-facebook"></i>
                               </a>
-                              <a href="" class="share-item">
+                              <a href="https://www.instagram.com" class="share-item">
                                    <i class="fab fa-instagram"></i>
                               </a>
-                              <a href="" class="share-item">
+                              <a href="https://twitter.com/" class="share-item">
                                    <i class="fab fa-twitter"></i>
                               </a>
                          </div>

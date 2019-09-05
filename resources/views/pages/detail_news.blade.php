@@ -6,10 +6,10 @@
     <div class="link" style="float:right;">
         <ul class="breadcrumbs">
             <li class="breadcrumbs-item">
-                <a href="{{ route('home') }}">Home</a>
+                <a href="{{ route('home') }}">Beranda</a>
             </li>
             <li class="breadcrumbs-item">
-                <a href="{{ route('news.index') }}">News</a>
+                <a href="{{ route('news.index') }}">Berita</a>
             </li>
             <li class="breadcrumbs-item">
                 {{ $news->title }}

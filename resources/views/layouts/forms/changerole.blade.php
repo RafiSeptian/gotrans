@@ -76,7 +76,3 @@
           Daftar
      </button>
 </form>
-     {{-- 
-          Jenis kendaraan (matic, manual, kopling)
-          KTP, SIM, STNK, BPKB, Foto kendaraan, Plat nomor, Merk kendaraan
-     --}}

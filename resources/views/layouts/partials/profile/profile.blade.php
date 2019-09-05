@@ -1,6 +1,8 @@
-<form action="{{ route('user.update', $user->id) }}" method="POST" class="form-profile" enctype="multipart/form-data">
+<form action="{{ route('user.update', $user->id) }}" method="POST" id="profile-form"class="form-profile" enctype="multipart/form-data">
           {{ csrf_field() }}
+
           {{ method_field('PUT') }}
+
           <div class="img-profile">
                <img src="{{ asset('storage/' . $user->avatar) }}" alt="" id="img-user">
                <input type="file" name="avatar" id="avatar" onchange="preview(event)">
@@ -21,7 +23,7 @@
           </div>
 
           <div class="group-form">
-               <label for="name">E-mail</label>
+               <label for="email">E-mail</label>
                <div class="form-wrapper">
                     <input type="email" name="email" id="email" value="{{ $user->email }}">
                </div>

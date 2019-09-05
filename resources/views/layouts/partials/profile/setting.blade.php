@@ -23,11 +23,11 @@
      <p class="content">
           Data - data pada akun ini akan hilang secara permanen
      </p>
-     <form action="{{ route('user.destroy', $user->id) }}" method="post">
+     <form action="{{ route('user.destroy', $user->id) }}" method="post" id="form-delete-account">
           {{ csrf_field() }}
-          {{ method_field('PUT') }}
+          {{ method_field('DELETE') }}
 
-          <button type="submit" class="btn-link">
+          <button type="submit" class="btn-link" id="btn-delete">
                Hapus
           </button>
      </form>

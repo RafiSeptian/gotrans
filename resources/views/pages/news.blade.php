@@ -27,7 +27,12 @@
                         <i class="fas fa-calendar-alt"></i> {{ \Jenssegers\Date\Date::parse($news->created_at)->format('d F Y') }}
                     </li>
                     <li>
-                        <i class="fas fa-folder"></i> Jalur Transportasi
+                        <i class="fas fa-folder"></i>
+                        @if ($news->category_id !== null)
+                            {{ ucfirst($news->category->name) }}
+                        @else
+                            Tidak ada kategori
+                        @endif
                     </li>
                     <li>
                         <i class="fas fa-comments"></i> {{ count($news->comment) }} Komentar
@@ -36,12 +41,14 @@
                 <h1 class="news-title">
                     {{ $news->title }}
                 </h1>
-                {!! $news->content !!}
                 
                 <a href="{{ route('news.show', $news->slug) }}" class="btn-more">
                         Selengkapnya
                 </a>
             @endforeach
+            <div class="pagination">
+                {{ $data->links() }}
+            </div>
         </div>
 
         @include('layouts.partials.news-ref')

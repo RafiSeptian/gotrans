@@ -16,8 +16,17 @@
             </div> --}}
             <div class="message">
                 <input type="hidden" id="news_id" name="news_id" value="{{ $news->id }}">
-                <textarea name="content" id="message" placeholder="Ketikan Komentarmu..."></textarea>
+                <textarea name="content" id="message"
+                    @if (Auth::guest())
+                        disabled
+                        placeholder="Silahkan Login untuk berkomentar"
+                    @endif
+                placeholder="Ketikan Komentarmu..."></textarea>
             </div>
-            <button type="submit" class="btn-send">Kirim Komentar</button>
+            <button type="submit" class="btn-send"
+            @if (Auth::guest())
+                disabled 
+            @endif
+            >Kirim Komentar</button>
     </form>
 </section>

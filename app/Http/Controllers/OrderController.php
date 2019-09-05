@@ -6,6 +6,7 @@ use App\Notif;
 use App\Order;
 use App\Services;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -16,9 +17,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('created_at', 'desc')->where('transportation_id', auth()->user()->services->transportation_id)->where('status', 'waiting')->get();
+        // $orders = Order::orderBy('created_at', 'desc')->where('transportation_id', auth()->user()->services->transportation_id)->where('status', 'waiting')->get();
 
-        return view('pages.order', compact('orders'));
+        // return view('pages.order', compact('orders'));
     }
 
     /**
@@ -61,6 +62,7 @@ class OrderController extends Controller
                 'is_read' => false
             ]);
         }
+
         // if (auth()->user()->role_id === 2) {
         //     if ($user !== null) {
         //         $user->update([

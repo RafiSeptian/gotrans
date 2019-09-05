@@ -22,6 +22,10 @@ p {
     color: var(--white);
 }
 
+.text-danger {
+    color: var(--red);
+}
+
 .bold {
     font-weight: bold;
 }
@@ -69,4 +73,8 @@ a:link {
 
 .bg-danger {
     background: var(--red);
+}
+
+.has-error {
+    border: 1px solid var(--red);
 }
